@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4qhyfwh5lfck"]
+
+[ext_resource type="Texture2D" uid="uid://b17pv5qxcwes1" path="res://Assets/Actions/BLK_BOOK.png" id="1_4pi2j"]
+[ext_resource type="Script" uid="uid://b2530b7fw7ugd" path="res://Scripts/block.gd" id="2_wayw5"]
+[ext_resource type="AudioStream" uid="uid://8dluew2npsl6" path="res://Assets/Sounds/Button_hover.wav" id="3_utt6r"]
+[ext_resource type="AudioStream" uid="uid://dkjbhchudktmy" path="res://Assets/Sounds/Pick_Up.mp3" id="4_esvtn"]
+[ext_resource type="AudioStream" uid="uid://d0akqxdwc0eff" path="res://Assets/Sounds/Drop.mp3" id="5_ejxx1"]
+
+[node name="Block" type="Sprite2D"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_4pi2j")
+script = ExtResource("2_wayw5")
+rapetit = 1.15
+
+[node name="blk_area" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="blk_area"]
+position = Vector2(0.0200534, -1.37091e-06)
+scale = Vector2(0.0165498, 0.016381)
+polygon = PackedVector2Array(992, -992, -686, -992, -686, -934, -744.8, -934, -748, -930.8, -748, -872, -806.8, -872, -810, -868.8, -810, -810, -868.8, -810, -872, -806.8, -872, -748, -934, -745.9, -934, 992, 810, 992, 810, 872, 868.8, 872, 872, 868.8, 872, 809.9, 931.1, 808, 934, 808, 934, 748, 992, 748)
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_utt6r")
+
+[node name="PickUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_esvtn")
+
+[node name="Drop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ejxx1")
+
+[connection signal="input_event" from="blk_area" to="." method="_on_blk_area_input_event"]
+[connection signal="mouse_entered" from="blk_area" to="." method="_on_blk_area_mouse_entered"]
+[connection signal="mouse_exited" from="blk_area" to="." method="_on_blk_area_mouse_exited"]

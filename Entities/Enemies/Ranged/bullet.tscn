@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://jcvcsd0016qv"]
+
+[ext_resource type="Script" uid="uid://buwtvxoxb5tyw" path="res://Entities/Enemies/Ranged/bullet.gd" id="1_hknxg"]
+[ext_resource type="Texture2D" uid="uid://boyalesvd2j7q" path="res://icon.svg" id="1_qqy5s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hknxg"]
+size = Vector2(1760, 14)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_hknxg")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-864.5, 4.76837e-07)
+scale = Vector2(13.7422, 0.109375)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.0363846, -4.35965e-06)
+scale = Vector2(0.0727686, 9.14286)
+shape = SubResource("RectangleShape2D_hknxg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-864.5, 4.76837e-07)
+scale = Vector2(13.7422, 0.109375)
+texture = ExtResource("1_qqy5s")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-865, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_hknxg")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

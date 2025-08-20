@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=3 uid="uid://1mhqylopchv5"]
+
+[ext_resource type="Texture2D" uid="uid://cul40738kdvae" path="res://Assets/Actions/PRISE.png" id="1_om5nn"]
+[ext_resource type="Texture2D" uid="uid://d03ycu6kc4y7h" path="res://Assets/Actions/ACT_POS.png" id="1_timk4"]
+[ext_resource type="Script" uid="uid://dh7qpyin4xlxk" path="res://Entities/ActionsReworked/Scripts/box.gd" id="2_neubk"]
+[ext_resource type="Texture2D" uid="uid://dv0hni070br2w" path="res://Assets/Actions/FWD_BOOK.png" id="2_syncu"]
+[ext_resource type="Texture2D" uid="uid://bad8ehh7psuyl" path="res://Assets/Actions/ATK_BOOK.png" id="3_rd5kj"]
+[ext_resource type="Script" uid="uid://c7fgb5w3s4fb" path="res://Entities/ActionsReworked/Scripts/actions.gd" id="3_ysvig"]
+[ext_resource type="Texture2D" uid="uid://b17pv5qxcwes1" path="res://Assets/Actions/BLK_BOOK.png" id="6_rd5kj"]
+
+[sub_resource type="GDScript" id="GDScript_ysqsh"]
+script/source = "extends TextureRect
+@onready var box: TextureRect = $\"../Box\"
+@onready var forward: TextureRect = $\".\"
+@onready var lvl_actuel: Node2D = $\"../..\"
+
+var dragged_texture: Texture2D = null
+
+func _get_drag_data(at_position):
+	if texture == null:
+		return null
+
+	dragged_texture = texture
+
+	var preview_texture = TextureRect.new()
+	preview_texture.texture = dragged_texture
+	preview_texture.expand_mode = 1
+	preview_texture.size = Vector2(96, 96)
+
+	var preview = Control.new()
+	preview.add_child(preview_texture)
+	texture = null
+	set_drag_preview(preview)
+
+	return dragged_texture
+
+func _can_drop_data(_pos, data):
+	return data is Texture2D
+
+func _drop_data(_pos, data):
+	if data == preload(\"res://Assets/Actions/ATK_BOOK.png\") or data == preload(\"res://Assets/Actions/ATK_DEACT.png\"):
+		texture = preload(\"res://Assets/Actions/ATK_BOOK.png\")
+	elif data == preload(\"res://Assets/Actions/BLK_BOOK.png\") or data == preload(\"res://Assets/Actions/BLK_DEACT.png\"):
+		texture = preload(\"res://Assets/Actions/BLK_BOOK.png\")
+	elif data == preload(\"res://Assets/Actions/FWD_BOOK.png\") or data == preload(\"res://Assets/Actions/FWD_DEACT.png\"):
+		texture = preload(\"res://Assets/Actions/FWD_BOOK.png\")
+
+func _notification(what):
+	if what == NOTIFICATION_DRAG_END:
+		if !get_viewport().gui_is_drag_successful() and dragged_texture:
+			texture = dragged_texture
+		dragged_texture = null
+"
+
+[node name="SET AS UNIQUE" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 56.0
+offset_bottom = 56.0
+
+[node name="BlockPOS" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 713.0
+offset_top = 540.0
+offset_right = 799.0
+offset_bottom = 630.0
+texture = ExtResource("1_timk4")
+
+[node name="AttackPOS" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 540.0
+offset_right = 946.0
+offset_bottom = 630.0
+texture = ExtResource("1_timk4")
+
+[node name="ForwardPOS" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1004.0
+offset_top = 540.0
+offset_right = 1090.0
+offset_bottom = 630.0
+texture = ExtResource("1_timk4")
+
+[node name="Box" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 50.0
+offset_top = 540.0
+offset_right = 140.0
+offset_bottom = 630.0
+texture = ExtResource("1_om5nn")
+stretch_mode = 5
+script = ExtResource("2_neubk")
+
+[node name="Attack" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 858.0
+offset_top = 540.0
+offset_right = 943.0
+offset_bottom = 625.0
+texture = ExtResource("3_rd5kj")
+stretch_mode = 5
+script = ExtResource("3_ysvig")
+
+[node name="Block" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 540.0
+offset_right = 795.0
+offset_bottom = 625.0
+texture = ExtResource("6_rd5kj")
+stretch_mode = 5
+script = ExtResource("3_ysvig")
+
+[node name="Forward" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 540.0
+offset_right = 1085.0
+offset_bottom = 625.0
+texture = ExtResource("2_syncu")
+stretch_mode = 5
+script = SubResource("GDScript_ysqsh")

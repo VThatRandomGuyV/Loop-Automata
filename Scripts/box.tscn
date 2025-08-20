@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://sm4gcpyslk7u"]
+
+[ext_resource type="Texture2D" uid="uid://cul40738kdvae" path="res://Assets/Actions/PRISE.png" id="1_vnh2f"]
+[ext_resource type="Script" uid="uid://ccb6pu1tdjjg" path="res://Scripts/box.gd" id="2_vnh2f"]
+[ext_resource type="Texture2D" uid="uid://ca5xalp5lmrui" path="res://Assets/Actions/ATK_DEACT.png" id="3_xvy43"]
+[ext_resource type="Texture2D" uid="uid://brg315kpt8n2n" path="res://Assets/Actions/ATK_ACTIVATED.png" id="4_pvlt1"]
+[ext_resource type="Texture2D" uid="uid://dgc2if6eybxjo" path="res://Assets/Actions/FWD_DEACT.png" id="5_5d4q6"]
+[ext_resource type="Texture2D" uid="uid://c75vhoapq8jke" path="res://Assets/Actions/FWD_ACTIVATED.png" id="6_jcr3o"]
+[ext_resource type="Texture2D" uid="uid://b48rvv6g4v06o" path="res://Assets/Actions/BLK_DEACT.png" id="7_fkfpl"]
+[ext_resource type="Texture2D" uid="uid://opgtbvgbisck" path="res://Assets/Actions/BLK_ACTIVATED.png" id="8_op2xd"]
+[ext_resource type="AudioStream" uid="uid://d0akqxdwc0eff" path="res://Assets/Sounds/Drop.mp3" id="9_51ats"]
+[ext_resource type="AudioStream" uid="uid://dkjbhchudktmy" path="res://Assets/Sounds/Pick_Up.mp3" id="10_glsay"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2y5aj"]
+size = Vector2(17, 11)
+
+[node name="Box" type="Sprite2D"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_vnh2f")
+script = ExtResource("2_vnh2f")
+
+[node name="box_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="box_area"]
+position = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_2y5aj")
+
+[node name="AtkDeact" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1, 1)
+scale = Vector2(0.875, 0.791667)
+texture = ExtResource("3_xvy43")
+
+[node name="AtkActivated" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.833332, 0.833332)
+scale = Vector2(0.885417, 0.802083)
+texture = ExtResource("4_pvlt1")
+
+[node name="FwdDeact" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.166666, 1)
+scale = Vector2(0.864583, 0.791667)
+texture = ExtResource("5_5d4q6")
+
+[node name="FwdDeact2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.166666, 1)
+scale = Vector2(0.864583, 0.791667)
+texture = ExtResource("5_5d4q6")
+
+[node name="FwdActivated" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.833333, 0.583333)
+scale = Vector2(0.885417, 0.817708)
+texture = ExtResource("6_jcr3o")
+
+[node name="BlkDeact" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1, 1)
+scale = Vector2(0.875, 0.791667)
+texture = ExtResource("7_fkfpl")
+
+[node name="BlkActivated" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.833333, 0.833333)
+scale = Vector2(0.885417, 0.822917)
+texture = ExtResource("8_op2xd")
+
+[node name="Drop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_51ats")
+
+[node name="PickUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_glsay")
+
+[connection signal="area_entered" from="box_area" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="box_area" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="box_area" to="." method="_on_area_2d_body_entered"]
+[connection signal="input_event" from="box_area" to="." method="_on_area_2d_input_event"]

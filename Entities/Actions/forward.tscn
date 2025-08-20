@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://demu4sb22kk8u"]
+
+[ext_resource type="Texture2D" uid="uid://dv0hni070br2w" path="res://Assets/Actions/FWD_BOOK.png" id="1_e7rf2"]
+[ext_resource type="Script" uid="uid://cqhh7xqyyowac" path="res://Scripts/forward.gd" id="2_e7rf2"]
+[ext_resource type="AudioStream" uid="uid://8dluew2npsl6" path="res://Assets/Sounds/Button_hover.wav" id="3_bgtm1"]
+[ext_resource type="AudioStream" uid="uid://dkjbhchudktmy" path="res://Assets/Sounds/Pick_Up.mp3" id="4_0jmim"]
+[ext_resource type="AudioStream" uid="uid://d0akqxdwc0eff" path="res://Assets/Sounds/Drop.mp3" id="5_0af54"]
+
+[node name="Forward" type="Sprite2D"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_e7rf2")
+script = ExtResource("2_e7rf2")
+rapetit = 1.15
+
+[node name="fwd_area" type="Area2D" parent="."]
+
+[node name="ForwardBox" type="CollisionPolygon2D" parent="fwd_area"]
+position = Vector2(0.038874, -1.49012e-07)
+scale = Vector2(0.0159008, 0.015751)
+polygon = PackedVector2Array(992, -992, -686, -992, -686, -934, -744.8, -934, -748, -930.8, -748, -872, -806.8, -872, -810, -868.8, -810, -810, -868.8, -810, -872, -806.8, -872, -748, -934, -745.9, -934, 992, 810, 992, 810, 872, 868.8, 872, 872, 868.8, 872, 809.9, 931.1, 808, 934, 808, 934, 748, 992, 748)
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bgtm1")
+
+[node name="PickUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0jmim")
+
+[node name="Drop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0af54")
+
+[connection signal="area_entered" from="fwd_area" to="." method="_on_fwd_area_area_entered"]
+[connection signal="input_event" from="fwd_area" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="fwd_area" to="." method="_on_fwd_area_mouse_entered"]
+[connection signal="mouse_exited" from="fwd_area" to="." method="_on_fwd_area_mouse_exited"]

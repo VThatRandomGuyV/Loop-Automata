@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0s51n4lvsk7l"]
+
+[ext_resource type="Texture2D" uid="uid://dh73cprxs1qxr" path="res://Assets/Actions/swap_lit.png" id="1_ducuy"]
+[ext_resource type="Script" uid="uid://degived3ev28l" path="res://Entities/Actions/swap.gd" id="2_dlug8"]
+[ext_resource type="Texture2D" uid="uid://bhdk04r1pxlum" path="res://Assets/Actions/swap_pressed.png" id="3_jgfmc"]
+[ext_resource type="Texture2D" uid="uid://c66ejbyjjswkp" path="res://Assets/Actions/swap_unlit.png" id="4_pqkwl"]
+[ext_resource type="AudioStream" uid="uid://8dluew2npsl6" path="res://Assets/Sounds/Button_hover.wav" id="5_jgfmc"]
+[ext_resource type="AudioStream" uid="uid://bujbdsg70n1a6" path="res://Assets/Sounds/Button_press.wav" id="6_pqkwl"]
+
+[node name="Swap" type="Sprite2D"]
+script = ExtResource("2_dlug8")
+
+[node name="SwapUnlit" type="Sprite2D" parent="."]
+texture = ExtResource("4_pqkwl")
+
+[node name="SwapPressed" type="Sprite2D" parent="."]
+position = Vector2(1.5, -1)
+scale = Vector2(0.90625, 0.9375)
+texture = ExtResource("3_jgfmc")
+
+[node name="SwapLit" type="Sprite2D" parent="."]
+texture = ExtResource("1_ducuy")
+
+[node name="SwapColid" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SwapColid"]
+visible = false
+position = Vector2(-1, 1.5)
+scale = Vector2(0.859375, 0.878906)
+polygon = PackedVector2Array(16, -16, -15.2, -16, -16, -15.5, -16, 16, 16, 16)
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jgfmc")
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_pqkwl")
+
+[connection signal="input_event" from="SwapColid" to="." method="_on_swap_colid_input_event"]
+[connection signal="mouse_entered" from="SwapColid" to="." method="_on_swap_colid_mouse_entered"]
+[connection signal="mouse_exited" from="SwapColid" to="." method="_on_swap_colid_mouse_exited"]

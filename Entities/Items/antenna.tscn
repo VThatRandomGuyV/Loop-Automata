@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cho61ggaqgepr"]
+
+[ext_resource type="Texture2D" uid="uid://cx6kxllhkanyo" path="res://Assets/Items/Antenna.png" id="1_4gm5e"]
+[ext_resource type="Script" uid="uid://fmcseohji7cs" path="res://Entities/Items/antenna.gd" id="2_qvy1f"]
+[ext_resource type="Texture2D" uid="uid://boyalesvd2j7q" path="res://icon.svg" id="3_qvem2"]
+
+[node name="Antenna" type="Sprite2D"]
+texture = ExtResource("1_4gm5e")
+script = ExtResource("2_qvy1f")
+
+[node name="Ref" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1363.42, 260.594)
+texture = ExtResource("3_qvem2")

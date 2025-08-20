@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://fjmfbs6afhuf"]
+
+[ext_resource type="Script" uid="uid://dq32t1bmsnypb" path="res://Entities/Enemies/Hammer/hammer_enemy.gd" id="1_1tb6f"]
+[ext_resource type="Texture2D" uid="uid://dcwdknbm2iqm0" path="res://Assets/Characters/melee_scaled.png" id="2_1tb6f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_toonk"]
+size = Vector2(108, 138)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tb6f"]
+size = Vector2(74, 138)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fh37n"]
+size = Vector2(128, 12)
+
+[node name="HammerEnemy" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_1tb6f")
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="HitBox" type="CollisionShape2D" parent="Area2D" groups=["enemies"]]
+visible = false
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_toonk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_1tb6f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_toonk")
+
+[node name="AttackLeft" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackLeft"]
+visible = false
+position = Vector2(-93, 0)
+shape = SubResource("RectangleShape2D_1tb6f")
+disabled = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AttackLeft"]
+visible = false
+position = Vector2(-64, -75)
+shape = SubResource("RectangleShape2D_fh37n")
+disabled = true
+
+[node name="AttackRight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="AttackRight"]
+visible = false
+position = Vector2(92, 0)
+shape = SubResource("RectangleShape2D_1tb6f")
+disabled = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AttackRight"]
+visible = false
+position = Vector2(64, -75)
+shape = SubResource("RectangleShape2D_fh37n")
+disabled = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

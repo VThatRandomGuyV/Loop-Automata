@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1knwj45b5xah"]
+
+[ext_resource type="Texture2D" uid="uid://c6oe7r5amtwjj" path="res://Assets/Actions/Button_Go_Unlit.png" id="1_2cktf"]
+[ext_resource type="Script" uid="uid://3u88pcb5drx2" path="res://Scripts/go.gd" id="2_vtc2i"]
+[ext_resource type="Texture2D" uid="uid://bp32gfl32a0ua" path="res://Assets/Actions/Button_go_lit.png" id="3_egyqg"]
+[ext_resource type="Texture2D" uid="uid://dvm2m8h2sb5au" path="res://Assets/Actions/Button_pressed.png" id="4_asxt1"]
+[ext_resource type="AudioStream" uid="uid://8dluew2npsl6" path="res://Assets/Sounds/Button_hover.wav" id="5_4g5h5"]
+[ext_resource type="AudioStream" uid="uid://bujbdsg70n1a6" path="res://Assets/Sounds/Button_press.wav" id="6_b7k7b"]
+[ext_resource type="AudioStream" uid="uid://bd6o742o0sdr1" path="res://Assets/Sounds/Go_Ready.wav" id="7_6rjpb"]
+
+[node name="Go" type="Sprite2D"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_2cktf")
+script = ExtResource("2_vtc2i")
+
+[node name="GoLit" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_egyqg")
+
+[node name="GoPlay" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_asxt1")
+
+[node name="go_area" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="go_area"]
+visible = false
+position = Vector2(1.01328e-06, -7.45058e-07)
+scale = Vector2(0.0115412, 0.0115412)
+polygon = PackedVector2Array(-1299.69, -404.348, -1299.69, 664.287, 1039.75, 664.287, 1039.75, -404.348)
+
+[node name="Sounds" type="Node2D" parent="."]
+visible = false
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_4g5h5")
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_b7k7b")
+
+[node name="GoReady" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_6rjpb")
+
+[connection signal="input_event" from="go_area" to="." method="_on_go_area_input_event"]
+[connection signal="mouse_entered" from="go_area" to="." method="_on_go_area_mouse_entered"]
+[connection signal="mouse_exited" from="go_area" to="." method="_on_go_area_mouse_exited"]

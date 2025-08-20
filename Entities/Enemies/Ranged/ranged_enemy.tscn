@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c08cdvoilx1f1"]
+
+[ext_resource type="Script" uid="uid://p2lgq471vcut" path="res://Entities/Enemies/Ranged/ranged_enemy.gd" id="1_m0vwy"]
+[ext_resource type="PackedScene" uid="uid://jcvcsd0016qv" path="res://Entities/Enemies/Ranged/bullet.tscn" id="2_1cvrw"]
+[ext_resource type="Texture2D" uid="uid://b3ceuk6xpcoml" path="res://Assets/Characters/range_scaled.png" id="3_1cvrw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_toonk"]
+size = Vector2(131, 120)
+
+[node name="RangedEnemy" type="CharacterBody2D"]
+script = ExtResource("1_m0vwy")
+bullet_scene = ExtResource("2_1cvrw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_1cvrw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_toonk")
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=["enemies"]]
+visible = false
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_toonk")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
