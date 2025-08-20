@@ -112,7 +112,7 @@ func zap() -> void:
 		p_anim.play("Attack")
 		await get_tree().create_timer(0.05).timeout
 		hitbox_zap_right_shape.disabled = false
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1).timeout
 		hitbox_zap_right_shape.disabled = true
 	else:
 		hitbox_zap_left_shape.disabled = false
