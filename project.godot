@@ -15,7 +15,7 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="Loop-Automata"
-run/main_scene="uid://cmc81oley6pw4"
+run/main_scene="uid://kwiq7bhx1j3r"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="uid://dve4y721lv7sq"
