@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://e2pvpaokk48b"]
+[gd_scene load_steps=23 format=4 uid="uid://e2pvpaokk48b"]
 
 [ext_resource type="Script" uid="uid://c8dkqt273qxvl" path="res://Entities/visuals/background.gd" id="1_5p3in"]
 [ext_resource type="Script" uid="uid://desor6f3047r8" path="res://Levels/RealLevels/Scripts/level_1.gd" id="1_g8hjn"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b1knwj45b5xah" path="res://Entities/Actions/go.tscn" id="13_3ymhq"]
 [ext_resource type="PackedScene" uid="uid://fjmfbs6afhuf" path="res://Entities/Enemies/Hammer/hammer_enemy.tscn" id="14_2t7jc"]
 [ext_resource type="Script" uid="uid://1d273x1ocna6" path="res://Entities/Enemies/Scripts/Level_1_enemies/hammer_enemy.gd" id="16_oew1u"]
+[ext_resource type="PackedScene" uid="uid://c0s51n4lvsk7l" path="res://Entities/Actions/swap.tscn" id="17_i60w7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2w0xy"]
 texture = ExtResource("2_tehkj")
@@ -473,3 +474,7 @@ texture = ExtResource("12_j8ras")
 [node name="HammerEnemy" parent="." instance=ExtResource("14_2t7jc")]
 script = ExtResource("16_oew1u")
 hammer_case = 7
+actions = Array[String](["move_left", "attack"])
+
+[node name="Swap" parent="." instance=ExtResource("17_i60w7")]
+visible = false

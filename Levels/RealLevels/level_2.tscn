@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dvm3xj3nk7gvk"]
+[gd_scene load_steps=24 format=4 uid="uid://dvm3xj3nk7gvk"]
 
 [ext_resource type="Script" uid="uid://c3f1ow3bkq2em" path="res://Levels/RealLevels/Scripts/level_2.gd" id="1_msldh"]
 [ext_resource type="Script" uid="uid://c8dkqt273qxvl" path="res://Entities/visuals/background.gd" id="2_x4jmc"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c08cdvoilx1f1" path="res://Entities/Enemies/Ranged/ranged_enemy.tscn" id="14_msldh"]
 [ext_resource type="PackedScene" uid="uid://b1knwj45b5xah" path="res://Entities/Actions/go.tscn" id="15_ab7c3"]
 [ext_resource type="Script" uid="uid://byv1fli0mdacf" path="res://Entities/Enemies/Scripts/Level_2_enemies/ranged_enemy.gd" id="17_sspry"]
+[ext_resource type="PackedScene" uid="uid://c0s51n4lvsk7l" path="res://Entities/Actions/swap.tscn" id="18_hfq12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_icqya"]
 texture = ExtResource("3_djeku")
@@ -502,3 +503,6 @@ texture = ExtResource("12_2elnh")
 [node name="RangedEnemy" parent="." instance=ExtResource("14_msldh")]
 script = ExtResource("17_sspry")
 bullet_scene = null
+actions = Array[String](["", "", "attack"])
+
+[node name="Swap" parent="." instance=ExtResource("18_hfq12")]

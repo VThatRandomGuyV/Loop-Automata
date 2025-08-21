@@ -11,7 +11,7 @@ extends CharacterBody2D
 @onready var ref: Sprite2D = $"../Ref"
 @onready var hm_enemy: CharacterBody2D = $"."
 @onready var player: CharacterBody2D = $"../Player"
-@onready var hm_sprite: Sprite2D = $Sprite2D
+@onready var hm_sprite: Sprite2D = $Sprite2D/Sprite2D
 
 @export var actions: Array[String] = ['move_left', 'attack']
 var target_distance := 0.0

@@ -1,11 +1,11 @@
 [gd_scene load_steps=52 format=3 uid="uid://c7v8i5w7uam4a"]
 
 [ext_resource type="Script" uid="uid://bc2gre5muwgmu" path="res://Entities/Player/player.gd" id="1_3uyv8"]
-[ext_resource type="Texture2D" uid="uid://bix2bw675864h" path="res://Assets/Characters/player_animation.png" id="2_3uyv8"]
-[ext_resource type="Texture2D" uid="uid://ed8to6m06hjp" path="res://Assets/Characters/player_attack sheet.png" id="2_5c2io"]
-[ext_resource type="Texture2D" uid="uid://ncu1tkfexpq7" path="res://Assets/Characters/player_robot idle native.png" id="2_tekja"]
-[ext_resource type="Texture2D" uid="uid://dgmj5u52k2vne" path="res://Assets/Characters/player_block-Sheet nativet.png" id="3_4wf4l"]
-[ext_resource type="Texture2D" uid="uid://ccnb8xy183h3d" path="res://Assets/Characters/player.png" id="3_lu8i8"]
+[ext_resource type="Texture2D" uid="uid://bix2bw675864h" path="res://Assets/Characters/Player/player_animation.png" id="2_3uyv8"]
+[ext_resource type="Texture2D" uid="uid://ed8to6m06hjp" path="res://Assets/Characters/Player/player_attack sheet.png" id="2_5c2io"]
+[ext_resource type="Texture2D" uid="uid://ncu1tkfexpq7" path="res://Assets/Characters/Player/player_robot idle native.png" id="2_tekja"]
+[ext_resource type="Texture2D" uid="uid://dgmj5u52k2vne" path="res://Assets/Characters/Player/player_block-Sheet nativet.png" id="3_4wf4l"]
+[ext_resource type="Texture2D" uid="uid://ccnb8xy183h3d" path="res://Assets/Characters/Player/player.png" id="3_lu8i8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_owvpp"]
 atlas = ExtResource("2_5c2io")
@@ -318,7 +318,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tekja"]
-size = Vector2(30.5, 46)
+size = Vector2(29.5, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c2io"]
 size = Vector2(15, 46)
@@ -343,7 +343,7 @@ texture = ExtResource("3_lu8i8")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=["player"]]
 visible = false
-position = Vector2(0.75, 0)
+position = Vector2(0.25, 0)
 shape = SubResource("RectangleShape2D_tekja")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
