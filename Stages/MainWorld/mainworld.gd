@@ -5,7 +5,7 @@ extends Node2D
 
 func _ready() -> void:
 	Global.world = self
-	load_level(0)
+	load_level(3)
 
 func unload_level(level_num: int):
 	var node_name := "Level%s" % level_num
@@ -20,15 +20,18 @@ func unload_level(level_num: int):
 			repeat_instance.queue_free()
 
 func load_level(level_num: int):
+	print("tried loading lvel:", level_num)
 	var node_name := "Level%s" % level_num
+	print("tried loading lvel:", node_name)
 	var repeat_instance = false
 	for level in Global.loaded_levels:
 		if level.name == node_name:
 			repeat_instance = true
 			break
 	if not repeat_instance:
-		var level_path_format := "res://Stages/Level%s/Level%s.tscn"
-		var level_path = level_path_format % [level_num, level_num]
+		var level_path_format := "res://Levels/RealLevels/level_%s.tscn"
+		var level_path = level_path_format % level_num
+		print(level_path)
 		var level_resource := load(level_path)
 		if (level_resource):
 			var level_instance = level_resource.instantiate()
@@ -36,3 +39,4 @@ func load_level(level_num: int):
 			level_instance.global_position = levels.find_child(node_name).global_position
 			Global.loaded_levels.append(level_instance)
 			loaded_levels.call_deferred("add_child", level_instance)
+			print("loaded level: ", node_name)

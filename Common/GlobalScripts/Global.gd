@@ -1,3 +1,8 @@
+extends Node
+
+var world
+var loaded_levels: Array = []
+
 #extends Node
 #
 #var world
