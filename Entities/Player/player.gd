@@ -1,6 +1,8 @@
 extends CharacterBody2D
 @onready var p_anim: AnimatedSprite2D = $Sprite2D/p_anim
-
+@onready var swap: Sprite2D = $"../Swap"
+@onready var swap_pressed: Sprite2D = $"../Swap/SwapPressed"
+@onready var swap_unlit: Sprite2D = $"../Swap/SwapUnlit"
 
 @onready var hitbox_block_right: Area2D = $BlockRight
 @onready var hitbox_block_right_shape: CollisionShape2D = $BlockRight/CollisionShape2D
@@ -23,19 +25,25 @@ var current_action : int = 0
 
 var speed = 200
 var moving = false
-var target_distance := 0.0
+var target_distance_x := 0.0
+var target_distance_y := 0.0
 var distance_moved :=0.0
 var direction :=1
 var switched = false
 var switch_height = 100 #to be adjusted
+var gros : float = 1.5
+
+var swapped : bool = true
 
 func _ready() -> void:
 	SignalBus.connect("switch_button", Callable(self,"switch"))
 	SignalBus.connect("level_start", Callable(self, "_on_level_start"))
 	SignalBus.connect("take_turn", Callable(self,"_on_take_turn"))
 	SignalBus.connect("player_hit", Callable(self,"_on_player_hit"))
-	var screen_width = DisplayServer.window_get_size().x
-	target_distance = screen_width / 7.0
+	var screen_width = get_viewport_rect().size.x
+	var screen_height = get_viewport_rect().size.y
+	target_distance_x = screen_width / 7.0
+	target_distance_y = screen_height / 2.0
 	_set_level_position()
 	p_anim.play("Idle")
 
@@ -49,7 +57,6 @@ func _set_level_position():
 	var scale_ratio = want_width / orig_width
 	
 	#EVERYTHING RELATED TO PLAYER POSITION AND SIZE
-	var gros : float = 1.8
 	player.scale = Vector2(scaling*scale_ratio*gros, scaling*scale_ratio*gros)
 	player.position.x = get_viewport_rect().size.x / (case_count * 2) + (get_viewport_rect().size.x / case_count)*0
 	player.position.y = (get_viewport_rect().size.y - (get_viewport_rect().size.y / port_rect_h)) - ((p_sprite.texture.get_height()*scaling*scale_ratio*gros) / 2)
@@ -99,7 +106,7 @@ func block() -> void:
 	if direction>0:
 		p_anim.play("Block")
 		hitbox_block_right_shape.disabled = false
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1).timeout
 		hitbox_block_right_shape.disabled = true
 	else:
 		hitbox_block_left_shape.disabled = false
@@ -110,7 +117,7 @@ func block() -> void:
 func zap() -> void:
 	if direction>0:
 		p_anim.play("Attack")
-		await get_tree().create_timer(0.05).timeout
+		await get_tree().create_timer(0.02).timeout
 		hitbox_zap_right_shape.disabled = false
 		await get_tree().create_timer(1).timeout
 		hitbox_zap_right_shape.disabled = true
@@ -121,22 +128,22 @@ func zap() -> void:
 
 func switch() -> void:
 	if switched == false:
-		global_position.y +=switch_height
+		global_position.y += switch_height
 		switched = true
 	else:
-		global_position.y -=switch_height
+		global_position.y -= switch_height
 		switched = false
 	
 func _physics_process(delta):
 	if moving:
-		var step : float = min(speed * delta, target_distance - distance_moved) #get_viewport_rect().size.x / case_count
+		var step : float = min(speed * delta, target_distance_x - distance_moved) #get_viewport_rect().size.x / case_count
 		
 		velocity.x = direction*step / delta  # convert back to per-second velocity
 		move_and_slide()
 		p_anim.play("Run")
 		distance_moved += step
 
-		if distance_moved >= target_distance:
+		if distance_moved >= target_distance_x:
 			moving = false
 			distance_moved = 0
 			velocity = Vector2.ZERO
@@ -144,7 +151,19 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 		move_and_slide()
 		moving=false
-
+	
+	if swap_pressed.visible == true and swapped == false or swap_unlit.visible == true and swapped == false:
+		var scaling : float = (get_viewport_rect().size.x / 1920)
+		var want_width : float = ref.texture.get_width()
+		var orig_width : float = p_sprite.texture.get_width()
+		var scale_ratio = want_width / orig_width
+		player.position.y = target_distance_y+35 - p_sprite.texture.get_height()*scaling*scale_ratio*gros
+	elif swap_pressed.visible == true and swapped == true or swap_unlit.visible == true and swapped == true:
+		var scaling : float = (get_viewport_rect().size.x / 1920)
+		var want_width : float = ref.texture.get_width()
+		var orig_width : float = p_sprite.texture.get_width()
+		var scale_ratio = want_width / orig_width
+		player.position.y =  (get_viewport_rect().size.y - (get_viewport_rect().size.y / port_rect_h)) - ((p_sprite.texture.get_height()*scaling*scale_ratio*gros) / 2)
 
 func _on_zap_right_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):

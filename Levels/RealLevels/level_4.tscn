@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://btp2wl35imxwr"]
+[gd_scene load_steps=23 format=4 uid="uid://btp2wl35imxwr"]
 
 [ext_resource type="Texture2D" uid="uid://d03ycu6kc4y7h" path="res://Assets/Actions/ACT_POS.png" id="1_4tghb"]
 [ext_resource type="Script" uid="uid://ba7xafff4c0q5" path="res://Levels/RealLevels/Scripts/level_4.gd" id="1_6gv03"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b1knwj45b5xah" path="res://Entities/Actions/go.tscn" id="12_j4545"]
 [ext_resource type="PackedScene" uid="uid://ct4cejoopabnp" path="res://Entities/Items/antenas.tscn" id="15_6gv03"]
 [ext_resource type="Script" uid="uid://dhwhmr3y6phx3" path="res://Entities/Enemies/Scripts/Level_4_enemies/ranged_enemy.gd" id="15_be4ys"]
+[ext_resource type="PackedScene" uid="uid://c0s51n4lvsk7l" path="res://Entities/Actions/swap.tscn" id="17_wx3pg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_be4ys"]
 texture = ExtResource("3_be4ys")
@@ -500,5 +501,9 @@ texture = ExtResource("8_c5v5j")
 script = ExtResource("15_be4ys")
 rg_case = 4
 bullet_scene = null
+actions = Array[String](["move_left", "move_left", "attack"])
 
 [node name="Go" parent="." instance=ExtResource("12_j4545")]
+
+[node name="Swap" parent="." instance=ExtResource("17_wx3pg")]
+visible = false

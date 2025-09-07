@@ -7,7 +7,7 @@ extends Node2D
 @onready var go: Sprite2D = $Go
 @onready var go_play: Sprite2D = $Go/GoPlay
 
-@onready var boxes := 3
+@onready var boxes := 1
 @export var time_between := 2
 var box_act = 0
 var reset_swap : bool = false
@@ -15,6 +15,10 @@ var timer_started : bool = false
 
 func _ready():
 	SignalBus.connect("level_start", Callable(self,"_on_level_start"))
+	SignalBus.connect("player_hit", Callable(self,"_on_player_hit"))
+
+func _on_player_hit():
+	get_tree().change_scene_to_file("res://Levels/RealLevels/level_6.tscn")
 
 func _on_level_start():
 	await get_tree().create_timer(0.1).timeout

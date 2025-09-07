@@ -6,6 +6,8 @@ extends Sprite2D
 @onready var ref: Sprite2D = $"../Ref"
 @onready var swap: Sprite2D = $"."
 @onready var btn_press: AudioStreamPlayer = $ButtonPress
+@onready var go_play: Sprite2D = $"../Go/GoPlay"
+@onready var player: CharacterBody2D = $"../Player"
 
 @export var swap_x : float = 940
 @export var swap_y : float = 25
@@ -44,10 +46,15 @@ func _process(delta):
 func _on_swap_colid_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			if swap_lit.visible == true:
-				swap_lit.visible = false
-				swap_pressed.visible = true
-				btn_press.play()
-				await get_tree().create_timer(0.5).timeout
-				swap_unlit.visible = true
-				swap_pressed.visible = false
+			if go_play.visible == true:
+				if swap_lit.visible == true:
+					swap_lit.visible = false
+					swap_pressed.visible = true
+					btn_press.play()
+					if player.swapped == true:
+						player.swapped = false
+					elif player.swapped == false:
+						player.swapped = true
+					await get_tree().create_timer(0.5).timeout
+					swap_unlit.visible = true
+					swap_pressed.visible = false

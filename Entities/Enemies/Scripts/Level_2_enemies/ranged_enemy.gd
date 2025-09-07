@@ -5,10 +5,11 @@ extends CharacterBody2D
 @onready var rg_enemy: CharacterBody2D = $"."
 @onready var ref: Sprite2D = $"../Ref"
 @onready var player: CharacterBody2D = $"../Player"
-@onready var rg_sprite: Sprite2D = $Sprite2D
+@onready var rg_sprite: Sprite2D = $Sprite2D/Sprite2D
+@onready var rg_anim: AnimatedSprite2D = $Sprite2D/AnimatedSprite2D
 
 @export var bullet_scene: PackedScene
-@export var actions: Array[String] = ['move_left', 'move_left', 'attack']
+@export var actions: Array[String] = ['', '', 'attack']
 
 var target_distance := 0.0
 var distance_moved := 0.0
@@ -40,6 +41,7 @@ func _ready() -> void:
 	var screen_width = DisplayServer.window_get_size().x
 	target_distance = screen_width / 7.0
 	_set_ranged_position()
+	rg_anim.play("Idle")
 
 func _on_take_turn():
 	match actions[current_action]:

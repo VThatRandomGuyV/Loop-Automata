@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var rg_sprite: Sprite2D = $Sprite2D
 
 @export var bullet_scene: PackedScene
-@export var actions: Array[String] = ['move_left', 'move_left', 'attack']
+@export var actions: Array[String] = ['', '', 'attack']
 
 var target_distance := 0.0
 var distance_moved := 0.0
