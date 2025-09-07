@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cuxgbtiy6347b"]
+[gd_scene load_steps=27 format=4 uid="uid://cuxgbtiy6347b"]
 
 [ext_resource type="Texture2D" uid="uid://d03ycu6kc4y7h" path="res://Assets/Actions/ACT_POS.png" id="1_ep2cj"]
 [ext_resource type="Script" uid="uid://cegomgc7rpk7l" path="res://Levels/RealLevels/Scripts/level_3.gd" id="1_jmt6q"]
@@ -378,6 +378,9 @@ func _notification(what):
 		dragged_texture = null
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cnmye"]
+size = Vector2(52, 530)
+
 [node name="Level_3" type="Node2D"]
 script = ExtResource("1_jmt6q")
 
@@ -513,3 +516,13 @@ hammer_case = 5
 
 [node name="Swap" parent="." instance=ExtResource("20_cnmye")]
 visible = false
+
+[node name="EndLevel" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1082, 406)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndLevel"]
+position = Vector2(45, -142)
+shape = SubResource("RectangleShape2D_cnmye")
+
+[connection signal="area_entered" from="EndLevel" to="." method="_on_end_level_area_entered"]

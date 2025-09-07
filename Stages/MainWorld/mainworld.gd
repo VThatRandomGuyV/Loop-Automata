@@ -5,7 +5,7 @@ extends Node2D
 
 func _ready() -> void:
 	Global.world = self
-	load_level(3)
+	load_level(1)
 
 func unload_level(level_num: int):
 	var node_name := "Level%s" % level_num

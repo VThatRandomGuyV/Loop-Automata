@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://ba2se17ku8vbn"]
+[gd_scene load_steps=11 format=4 uid="uid://ba2se17ku8vbn"]
 
 [ext_resource type="Script" uid="uid://c8dkqt273qxvl" path="res://Entities/visuals/background.gd" id="1_xrrvc"]
 [ext_resource type="Texture2D" uid="uid://b3cag4rbj72pm" path="res://Assets/Tilemap/Justi_Tilemaps/Tileset_Background.png" id="2_o2ns6"]
@@ -319,6 +319,9 @@ texture = ExtResource("3_qtyag")
 [sub_resource type="TileSet" id="TileSet_5ug8c"]
 sources/0 = SubResource("TileSetAtlasSource_5m58d")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtyag"]
+size = Vector2(52, 530)
+
 [node name="Level_7" type="Node2D"]
 
 [node name="L7" type="Node2D" parent="."]
@@ -348,3 +351,11 @@ position = Vector2(5.49946, -0.0727649)
 visible = false
 position = Vector2(1363.42, 260.594)
 texture = ExtResource("5_ejdc0")
+
+[node name="EndLevel" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1082, 406)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndLevel"]
+position = Vector2(45, -142)
+shape = SubResource("RectangleShape2D_qtyag")

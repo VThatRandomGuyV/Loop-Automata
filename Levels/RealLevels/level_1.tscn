@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://e2pvpaokk48b"]
+[gd_scene load_steps=24 format=4 uid="uid://e2pvpaokk48b"]
 
 [ext_resource type="Script" uid="uid://c8dkqt273qxvl" path="res://Entities/visuals/background.gd" id="1_5p3in"]
 [ext_resource type="Script" uid="uid://desor6f3047r8" path="res://Levels/RealLevels/Scripts/level_1.gd" id="1_g8hjn"]
@@ -375,6 +375,9 @@ func _notification(what):
 		dragged_texture = null
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i60w7"]
+size = Vector2(52, 530)
+
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_g8hjn")
 
@@ -477,3 +480,13 @@ hammer_case = 7
 
 [node name="Swap" parent="." instance=ExtResource("17_i60w7")]
 visible = false
+
+[node name="EndLevel" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1082, 406)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndLevel"]
+position = Vector2(45, -142)
+shape = SubResource("RectangleShape2D_i60w7")
+
+[connection signal="area_entered" from="EndLevel" to="." method="_on_end_level_area_entered"]

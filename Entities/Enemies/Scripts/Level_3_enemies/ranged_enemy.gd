@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var rg_enemy: CharacterBody2D = $"."
 @onready var ref: Sprite2D = $"../Ref"
 @onready var player: CharacterBody2D = $"../Player"
-@onready var rg_sprite: Sprite2D = $Sprite2D
+@onready var rg_sprite: Sprite2D = $Sprite2D/Sprite2D
 
 @export var bullet_scene: PackedScene
 @export var actions: Array[String] = ['', '', 'attack']

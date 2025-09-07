@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://n7f1ycqlfnxb"]
+[gd_scene load_steps=21 format=4 uid="uid://n7f1ycqlfnxb"]
 
 [ext_resource type="Script" uid="uid://b8afd1msapy8h" path="res://Levels/RealLevels/Scripts/level_6.gd" id="1_i17co"]
 [ext_resource type="Script" uid="uid://c8dkqt273qxvl" path="res://Entities/visuals/background.gd" id="2_faei2"]
@@ -372,6 +372,9 @@ func _notification(what):
 		dragged_texture = null
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvnud"]
+size = Vector2(52, 530)
+
 [node name="Level_6" type="Node2D"]
 script = ExtResource("1_i17co")
 
@@ -446,5 +449,14 @@ script = SubResource("GDScript_ysqsh")
 
 [node name="HammerEnemy" parent="." instance=ExtResource("14_tvnud")]
 
+[node name="EndLevel" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1082, 406)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndLevel"]
+position = Vector2(45, -142)
+shape = SubResource("RectangleShape2D_tvnud")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="Player" method="_on_timer_timeout"]
+[connection signal="area_entered" from="EndLevel" to="." method="_on_end_level_area_entered"]

@@ -12,3 +12,8 @@ func _on_level_start():
 	while true:
 		SignalBus.emit_signal("take_turn")
 		await get_tree().create_timer(time_between).timeout
+
+func _on_end_level_area_entered(area: Area2D) -> void:
+	if area.is_in_group("player"):
+		Global.world.unload_level(4)
+		Global.world.load_level(5)

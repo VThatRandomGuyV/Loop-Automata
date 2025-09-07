@@ -36,3 +36,8 @@ func _process(delta):
 		timer.wait_time = 2*boxes
 		timer.start()
 		timer_started = true
+		
+func _on_end_level_area_entered(area: Area2D) -> void:
+	if area.is_in_group("player"):
+		Global.world.unload_level(6)
+		Global.world.load_level(7)
