@@ -31,7 +31,7 @@ var distance_moved :=0.0
 var direction :=1
 var switched = false
 var switch_height = 100 #to be adjusted
-var gros : float = 1.8
+var gros : float = 1.5
 
 var swapped : bool = true
 
@@ -117,7 +117,7 @@ func block() -> void:
 func zap() -> void:
 	if direction>0:
 		p_anim.play("Attack")
-		await get_tree().create_timer(0.05).timeout
+		await get_tree().create_timer(0.02).timeout
 		hitbox_zap_right_shape.disabled = false
 		await get_tree().create_timer(1).timeout
 		hitbox_zap_right_shape.disabled = true

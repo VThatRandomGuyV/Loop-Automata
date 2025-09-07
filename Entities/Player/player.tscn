@@ -347,7 +347,6 @@ position = Vector2(0.25, 0)
 shape = SubResource("RectangleShape2D_tekja")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_tekja")
 
 [node name="BlockRight" type="Area2D" parent="."]

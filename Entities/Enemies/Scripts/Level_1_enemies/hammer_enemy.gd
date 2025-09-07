@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var hm_enemy: CharacterBody2D = $"."
 @onready var player: CharacterBody2D = $"../Player"
 @onready var hm_sprite: Sprite2D = $Sprite2D/Sprite2D
+@onready var hm_anim: AnimatedSprite2D = $Sprite2D/AnimatedSprite2D
 
 @export var actions: Array[String] = ['move_left', 'attack']
 var target_distance := 0.0
@@ -43,7 +44,10 @@ func _ready() -> void:
 	SignalBus.connect("take_turn", Callable(self, "_on_take_turn"))
 	var screen_width = DisplayServer.window_get_size().x
 	target_distance = screen_width / 7.0
-	_set_hammer_position()
+	_set_level_position()
+	hm_anim.play("Idle")
+	hitbox_left_shape_1.disabled = true
+	hitbox_left_shape_2.disabled = true
 
 func _on_take_turn():
 	match actions[current_action]:
@@ -58,6 +62,9 @@ func _on_take_turn():
 func move_left() -> void:
 	move = true
 	direction = -1
+	hm_anim.play("Run")
+	await get_tree().create_timer(1).timeout
+	hm_anim.play("Idle")
 
 func move_right() -> void:
 	move = true
@@ -65,9 +72,13 @@ func move_right() -> void:
 	
 func attack() -> void:
 	if direction < 0:
+		hm_anim.position.x -= 7.802
+		hm_anim.play("Attack")
 		hitbox_left_shape_1.disabled = false
 		hitbox_left_shape_2.disabled = false
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1).timeout
+		hm_anim.position.x += 7.802
+		hm_anim.play("Idle")
 		hitbox_left_shape_1.disabled = true
 		hitbox_left_shape_2.disabled = true
 	else:

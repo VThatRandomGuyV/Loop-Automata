@@ -11,7 +11,7 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = $"../Player"
 @onready var hm_anim: AnimatedSprite2D = $Sprite2D/AnimatedSprite2D
 
-@export var actions: Array[String] = ['move_left', '']
+@export var actions: Array[String] = ['move_left', 'attack']
 var target_distance := 0.0
 var distance_moved := 0.0
 var speed := 200

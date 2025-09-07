@@ -519,12 +519,10 @@ texture = ExtResource("11_ptjm8")
 [node name="HammerEnemy" parent="." instance=ExtResource("12_w3i2v")]
 script = ExtResource("13_5dayr")
 hammer_case = 4
-actions = Array[String](["move_left", "attack"])
 
 [node name="HammerEnemy2" parent="." instance=ExtResource("12_w3i2v")]
 script = ExtResource("14_w28r7")
 hammer_case = 6
-actions = Array[String](["move_left", "attack"])
 
 [node name="Go" parent="." instance=ExtResource("15_kktwd")]
 

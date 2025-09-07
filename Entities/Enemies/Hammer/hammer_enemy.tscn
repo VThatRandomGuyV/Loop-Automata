@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b7oqjlavtxbrk" path="res://Assets/Characters/Melee/melee.png" id="3_toonk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_toonk"]
-size = Vector2(3.41608, 4.37642)
+size = Vector2(2.36864, 4.37642)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h7g2f"]
 atlas = ExtResource("2_cplc5")
@@ -259,10 +259,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1tb6f"]
-size = Vector2(74, 138)
+size = Vector2(71.7617, 138)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fh37n"]
-size = Vector2(128, 12)
+size = Vector2(118.64, 12)
 
 [node name="HammerEnemy" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_1tb6f")
@@ -280,8 +280,7 @@ scale = Vector2(0.1, 0.1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_1tb6f")
-animation = &"Idle"
-frame_progress = 0.0509404
+animation = &"Attack"
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
@@ -289,22 +288,19 @@ texture_filter = 1
 texture = ExtResource("3_toonk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0.00945354, 0.021424)
+position = Vector2(0.533172, 0.021424)
 shape = SubResource("RectangleShape2D_toonk")
 
 [node name="AttackLeft" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackLeft"]
-visible = false
-position = Vector2(-2.91327, 0.02828)
+position = Vector2(-1.95349, 0.0483663)
 scale = Vector2(0.032, 0.032)
 shape = SubResource("RectangleShape2D_1tb6f")
 disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="AttackLeft"]
-visible = false
-position = Vector2(-2.0562, -2.39054)
+position = Vector2(-1.20343, -2.41063)
 scale = Vector2(0.032, 0.032)
 shape = SubResource("RectangleShape2D_fh37n")
 disabled = true

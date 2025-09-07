@@ -503,6 +503,6 @@ texture = ExtResource("12_2elnh")
 [node name="RangedEnemy" parent="." instance=ExtResource("14_msldh")]
 script = ExtResource("17_sspry")
 bullet_scene = null
-actions = Array[String](["", "", "attack"])
 
 [node name="Swap" parent="." instance=ExtResource("18_hfq12")]
+visible = false
