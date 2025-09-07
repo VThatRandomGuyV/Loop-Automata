@@ -44,7 +44,7 @@ func _ready() -> void:
 	SignalBus.connect("take_turn", Callable(self, "_on_take_turn"))
 	var screen_width = DisplayServer.window_get_size().x
 	target_distance = screen_width / 7.0
-	_set_level_position()
+	_set_hammer_position()
 	hm_anim.play("Idle")
 	hitbox_left_shape_1.disabled = true
 	hitbox_left_shape_2.disabled = true

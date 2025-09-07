@@ -473,8 +473,7 @@ texture = ExtResource("12_j8ras")
 
 [node name="HammerEnemy" parent="." instance=ExtResource("14_2t7jc")]
 script = ExtResource("16_oew1u")
-actions = null
-hammer_case = null
+hammer_case = 7
 
 [node name="Swap" parent="." instance=ExtResource("17_i60w7")]
 visible = false
