@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckjbda3iylsvc"]
+
+[ext_resource type="Script" uid="uid://7s4vcorpmcgj" path="res://Stages/music_control.gd" id="1_p034h"]
+[ext_resource type="AudioStream" uid="uid://c2057hqdwqe6i" path="res://Assets/Sounds/Music_Game.mp3" id="2_vnqdu"]
+[ext_resource type="AudioStream" uid="uid://8dluew2npsl6" path="res://Assets/Sounds/Button_hover.wav" id="3_5jca4"]
+[ext_resource type="AudioStream" uid="uid://bujbdsg70n1a6" path="res://Assets/Sounds/Button_press.wav" id="4_mcymb"]
+[ext_resource type="AudioStream" uid="uid://bd6o742o0sdr1" path="res://Assets/Sounds/Go_Ready.wav" id="5_8s1go"]
+[ext_resource type="AudioStream" uid="uid://dkjbhchudktmy" path="res://Assets/Sounds/Pick_Up.mp3" id="6_gr2f7"]
+
+[node name="MusicControl" type="Node"]
+script = ExtResource("1_p034h")
+
+[node name="MusicGame" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vnqdu")
+parameters/looping = true
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5jca4")
+volume_db = -5.0
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mcymb")
+volume_db = -5.0
+
+[node name="GoReady" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8s1go")
+
+[node name="PickUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_gr2f7")

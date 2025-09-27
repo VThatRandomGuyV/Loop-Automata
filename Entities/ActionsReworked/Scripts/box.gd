@@ -60,3 +60,9 @@ func _notification(what):
 				texture = preload("res://Assets/Actions/FWD_DEACT.png")
 				lvl_actuel.box_act += 1
 		dragged_texture = null
+
+func _on_mouse_entered() -> void:
+	box.modulate = Color(0.5, 0.5, 0.5)
+
+func _on_mouse_exited() -> void:
+	box.modulate = Color(1, 1, 1)

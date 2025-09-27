@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bkb58pbb1j6wn"]
+[gd_scene load_steps=21 format=4 uid="uid://bkb58pbb1j6wn"]
 
 [ext_resource type="Script" uid="uid://b40en16ojk6x5" path="res://Levels/RealLevels/Scripts/level_tutorial.gd" id="1_36krl"]
 [ext_resource type="Script" uid="uid://c8dkqt273qxvl" path="res://Entities/visuals/background.gd" id="1_qw27p"]
@@ -8,10 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://dv0hni070br2w" path="res://Assets/Actions/FWD_BOOK.png" id="2_luf4a"]
 [ext_resource type="Texture2D" uid="uid://be6bqm075b6mm" path="res://Assets/Tileset/TILESET.png" id="3_lg2kp"]
 [ext_resource type="PackedScene" uid="uid://ct4cejoopabnp" path="res://Entities/Items/antenas.tscn" id="5_7sbx1"]
+[ext_resource type="Texture2D" uid="uid://blqky0cemcoh2" path="res://Assets/Items/door.png" id="10_36krl"]
 [ext_resource type="PackedScene" uid="uid://c7v8i5w7uam4a" path="res://Entities/Player/player.tscn" id="10_a2tri"]
 [ext_resource type="Texture2D" uid="uid://d03ycu6kc4y7h" path="res://Assets/Actions/ACT_POS.png" id="10_tw6rn"]
 [ext_resource type="Texture2D" uid="uid://boyalesvd2j7q" path="res://icon.svg" id="11_lg2kp"]
 [ext_resource type="PackedScene" uid="uid://b1knwj45b5xah" path="res://Entities/Actions/go.tscn" id="12_m2t7o"]
+[ext_resource type="PackedScene" uid="uid://c0s51n4lvsk7l" path="res://Entities/Actions/swap.tscn" id="13_m2t7o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7sbx1"]
 texture = ExtResource("2_a2tri")
@@ -368,7 +370,17 @@ func _notification(what):
 		if !get_viewport().gui_is_drag_successful() and dragged_texture:
 			texture = dragged_texture
 		dragged_texture = null
+
+func _on_mouse_entered() -> void:
+	forward.modulate = Color(0.5, 0.5, 0.5)
+	MusicControl._butt_hover()
+
+func _on_mouse_exited() -> void:
+	forward.modulate = Color(1, 1, 1)
 "
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2t7o"]
+size = Vector2(24, 28.1)
 
 [node name="Level_Tutorial" type="Node2D"]
 script = ExtResource("1_36krl")
@@ -410,7 +422,7 @@ offset_bottom = 630.0
 texture = ExtResource("10_tw6rn")
 
 [node name="Box" type="TextureRect" parent="SET AS UNIQUE"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 50.0
 offset_top = 540.0
 offset_right = 140.0
@@ -429,6 +441,18 @@ texture = ExtResource("2_luf4a")
 stretch_mode = 5
 script = SubResource("GDScript_hh4qi")
 
+[node name="ActPos" type="Sprite2D" parent="."]
+position = Vector2(1069, 465)
+scale = Vector2(4, 4)
+texture = ExtResource("10_36krl")
+
+[node name="Area2D" type="Area2D" parent="ActPos"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActPos/Area2D"]
+visible = false
+position = Vector2(0, 2.050003)
+shape = SubResource("RectangleShape2D_m2t7o")
+
 [node name="Player" parent="." instance=ExtResource("10_a2tri")]
 
 [node name="Ref" type="Sprite2D" parent="."]
@@ -437,3 +461,13 @@ position = Vector2(1363.42, 260.594)
 texture = ExtResource("11_lg2kp")
 
 [node name="Go" parent="." instance=ExtResource("12_m2t7o")]
+
+[node name="Swap" parent="." instance=ExtResource("13_m2t7o")]
+visible = false
+
+[connection signal="mouse_entered" from="SET AS UNIQUE/Box" to="SET AS UNIQUE/Box" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SET AS UNIQUE/Box" to="SET AS UNIQUE/Box" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="SET AS UNIQUE/Forward" to="SET AS UNIQUE/Forward" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SET AS UNIQUE/Forward" to="SET AS UNIQUE/Forward" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ActPos/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="mouse_entered" from="Player" to="SET AS UNIQUE/Box" method="_on_player_mouse_entered"]

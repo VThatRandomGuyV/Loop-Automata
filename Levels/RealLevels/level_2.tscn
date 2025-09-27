@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dvm3xj3nk7gvk"]
+[gd_scene load_steps=26 format=4 uid="uid://dvm3xj3nk7gvk"]
 
 [ext_resource type="Script" uid="uid://c3f1ow3bkq2em" path="res://Levels/RealLevels/Scripts/level_2.gd" id="1_msldh"]
 [ext_resource type="Script" uid="uid://c8dkqt273qxvl" path="res://Entities/visuals/background.gd" id="2_x4jmc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d03ycu6kc4y7h" path="res://Assets/Actions/ACT_POS.png" id="5_2elnh"]
 [ext_resource type="PackedScene" uid="uid://ct4cejoopabnp" path="res://Entities/Items/antenas.tscn" id="5_msldh"]
 [ext_resource type="Texture2D" uid="uid://cul40738kdvae" path="res://Assets/Actions/PRISE.png" id="6_ab7c3"]
+[ext_resource type="Texture2D" uid="uid://blqky0cemcoh2" path="res://Assets/Items/door.png" id="6_pun8j"]
 [ext_resource type="Script" uid="uid://dh7qpyin4xlxk" path="res://Entities/ActionsReworked/Scripts/box.gd" id="7_msldh"]
 [ext_resource type="Texture2D" uid="uid://bad8ehh7psuyl" path="res://Assets/Actions/ATK_BOOK.png" id="8_sspry"]
 [ext_resource type="Script" uid="uid://c7fgb5w3s4fb" path="res://Entities/ActionsReworked/Scripts/actions.gd" id="9_hfq12"]
@@ -332,6 +333,9 @@ texture = ExtResource("4_om6wl")
 [sub_resource type="TileSet" id="TileSet_7axsq"]
 sources/0 = SubResource("TileSetAtlasSource_ejb82")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lb60b"]
+size = Vector2(24, 28.1)
+
 [sub_resource type="GDScript" id="GDScript_ysqsh"]
 script/source = "extends TextureRect
 @onready var box: TextureRect = $\"../Box\"
@@ -374,6 +378,13 @@ func _notification(what):
 		if !get_viewport().gui_is_drag_successful() and dragged_texture:
 			texture = dragged_texture
 		dragged_texture = null
+
+func _on_mouse_entered() -> void:
+	forward.modulate = Color(0.5, 0.5, 0.5)
+	MusicControl._butt_hover()
+
+func _on_mouse_exited() -> void:
+	forward.modulate = Color(1, 1, 1)
 "
 
 [node name="Level_2" type="Node2D"]
@@ -400,6 +411,18 @@ tile_map_data = PackedByteArray("AAD1//3/AAACAAAAAAD2//3/AAACAAAAAAD3//3/AAACAAA
 tile_set = SubResource("TileSet_7axsq")
 
 [node name="Antenas" parent="." instance=ExtResource("5_msldh")]
+
+[node name="ActPos" type="Sprite2D" parent="."]
+position = Vector2(1069, 465)
+scale = Vector2(4, 4)
+texture = ExtResource("6_pun8j")
+
+[node name="Area2D" type="Area2D" parent="ActPos"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActPos/Area2D"]
+visible = false
+position = Vector2(0, 2.050003)
+shape = SubResource("RectangleShape2D_lb60b")
 
 [node name="SET AS UNIQUE" type="Control" parent="."]
 layout_mode = 3
@@ -432,7 +455,7 @@ offset_bottom = 630.0
 texture = ExtResource("5_2elnh")
 
 [node name="Box" type="TextureRect" parent="SET AS UNIQUE"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 50.0
 offset_top = 540.0
 offset_right = 140.0
@@ -442,7 +465,7 @@ stretch_mode = 5
 script = ExtResource("7_msldh")
 
 [node name="Box2" type="TextureRect" parent="SET AS UNIQUE"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 185.0
 offset_top = 540.0
 offset_right = 275.0
@@ -452,7 +475,7 @@ stretch_mode = 5
 script = ExtResource("7_msldh")
 
 [node name="Box3" type="TextureRect" parent="SET AS UNIQUE"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 320.0
 offset_top = 540.0
 offset_right = 410.0
@@ -506,3 +529,17 @@ bullet_scene = null
 
 [node name="Swap" parent="." instance=ExtResource("18_hfq12")]
 visible = false
+
+[connection signal="area_entered" from="ActPos/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="mouse_entered" from="SET AS UNIQUE/Box" to="SET AS UNIQUE/Box" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SET AS UNIQUE/Box" to="SET AS UNIQUE/Box" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="SET AS UNIQUE/Box2" to="SET AS UNIQUE/Box2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SET AS UNIQUE/Box2" to="SET AS UNIQUE/Box2" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="SET AS UNIQUE/Box3" to="SET AS UNIQUE/Box3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SET AS UNIQUE/Box3" to="SET AS UNIQUE/Box3" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="SET AS UNIQUE/Attack" to="SET AS UNIQUE/Attack" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SET AS UNIQUE/Attack" to="SET AS UNIQUE/Attack" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="SET AS UNIQUE/Block" to="SET AS UNIQUE/Block" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SET AS UNIQUE/Block" to="SET AS UNIQUE/Block" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="SET AS UNIQUE/Forward" to="SET AS UNIQUE/Forward" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SET AS UNIQUE/Forward" to="SET AS UNIQUE/Forward" method="_on_mouse_exited"]

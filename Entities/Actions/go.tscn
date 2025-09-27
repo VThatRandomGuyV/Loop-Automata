@@ -34,12 +34,15 @@ visible = false
 
 [node name="ButtonHover" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("5_4g5h5")
+volume_db = -5.0
 
 [node name="ButtonPress" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("6_b7k7b")
+volume_db = -5.0
 
 [node name="GoReady" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("7_6rjpb")
+volume_db = -5.0
 
 [connection signal="input_event" from="go_area" to="." method="_on_go_area_input_event"]
 [connection signal="mouse_entered" from="go_area" to="." method="_on_go_area_mouse_entered"]

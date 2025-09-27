@@ -6,9 +6,8 @@ extends Node2D
 @onready var timer: Timer = $Timer
 @onready var go: Sprite2D = $Go
 @onready var go_play: Sprite2D = $Go/GoPlay
-const LEVEL_6 = preload("uid://n7f1ycqlfnxb")
 
-@onready var boxes := 3
+@onready var boxes := 2
 @export var time_between := 2
 var box_act = 0
 var reset_swap : bool = false
@@ -19,7 +18,7 @@ func _ready():
 	SignalBus.connect("player_hit", Callable(self,"_on_player_hit"))
 
 func _on_player_hit():
-	get_tree().change_scene_to_file("res://Levels/RealLevels/level_5.tscn")
+	get_tree().change_scene_to_file("res://Levels/RealLevels/level_10.tscn")
 
 func _on_level_start():
 	await get_tree().create_timer(0.1).timeout
@@ -38,7 +37,6 @@ func _process(delta):
 		timer.start()
 		timer_started = true
 
-func _on_area_2d_area_entered(area):
-	if area.get_parent().name == "Player":
-		await get_tree().create_timer(1.5).timeout
-		get_tree().change_scene_to_packed(LEVEL_6)
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.

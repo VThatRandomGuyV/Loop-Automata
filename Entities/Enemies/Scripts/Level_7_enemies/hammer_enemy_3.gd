@@ -34,8 +34,8 @@ func _set_level_position():
 	#EVERYTHING RELATED TO PLAYER POSITION AND SIZE
 	var gros : float = 1.45
 	hm_enemy.scale = Vector2(scaling*scale_ratio*gros*10, scaling*scale_ratio*gros*10)
-	hm_enemy.position.x = get_viewport_rect().size.x / (case_count * 2) + (get_viewport_rect().size.x / case_count)*5
-	hm_enemy.position.y = (get_viewport_rect().size.y - (get_viewport_rect().size.y / player.port_rect_h)) - ((hm_sprite.texture.get_height()*scaling*scale_ratio*gros)/2)
+	hm_enemy.position.x = get_viewport_rect().size.x / (case_count * 2) + (get_viewport_rect().size.x / case_count)*6
+	hm_enemy.position.y = (get_viewport_rect().size.y - (get_viewport_rect().size.y / 2) - 70) - ((hm_sprite.texture.get_height()*scaling*scale_ratio*gros)/2)
 
 func _ready() -> void:
 	SignalBus.connect("take_turn", Callable(self, "_on_take_turn"))

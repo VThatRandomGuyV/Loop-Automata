@@ -342,11 +342,11 @@ texture = ExtResource("3_lu8i8")
 [node name="Area2D" type="Area2D" parent="." groups=["player"]]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=["player"]]
-visible = false
 position = Vector2(0.25, 0)
 shape = SubResource("RectangleShape2D_tekja")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_tekja")
 
 [node name="BlockRight" type="Area2D" parent="."]

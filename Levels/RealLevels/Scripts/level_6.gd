@@ -6,6 +6,7 @@ extends Node2D
 @onready var timer: Timer = $Timer
 @onready var go: Sprite2D = $Go
 @onready var go_play: Sprite2D = $Go/GoPlay
+const LEVEL_7 = preload("uid://ba2se17ku8vbn")
 
 @onready var boxes := 1
 @export var time_between := 2
@@ -36,3 +37,8 @@ func _process(delta):
 		timer.wait_time = 2*boxes
 		timer.start()
 		timer_started = true
+
+func _on_area_2d_area_entered(area):
+	if area.get_parent().name == "Player":
+		await get_tree().create_timer(1.5).timeout
+		get_tree().change_scene_to_packed(LEVEL_7)

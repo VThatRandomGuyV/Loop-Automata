@@ -31,9 +31,11 @@ polygon = PackedVector2Array(16, -16, -15.2, -16, -16, -15.5, -16, 16, 16, 16)
 
 [node name="ButtonHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_jgfmc")
+volume_db = -5.0
 
 [node name="ButtonPress" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_pqkwl")
+volume_db = -5.0
 
 [connection signal="input_event" from="SwapColid" to="." method="_on_swap_colid_input_event"]
 [connection signal="mouse_entered" from="SwapColid" to="." method="_on_swap_colid_mouse_entered"]

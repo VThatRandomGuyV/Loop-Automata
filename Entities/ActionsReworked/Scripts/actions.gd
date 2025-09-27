@@ -39,3 +39,10 @@ func _notification(what):
 		if !get_viewport().gui_is_drag_successful() and dragged_texture:
 			texture = dragged_texture
 		dragged_texture = null
+
+func _on_mouse_entered() -> void:
+	forward.modulate = Color(0.5, 0.5, 0.5)
+	MusicControl._butt_hover()
+
+func _on_mouse_exited() -> void:
+	forward.modulate = Color(1, 1, 1)
